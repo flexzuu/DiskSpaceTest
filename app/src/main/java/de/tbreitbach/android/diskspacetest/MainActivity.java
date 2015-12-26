@@ -23,19 +23,27 @@ public class MainActivity extends AppCompatActivity {
         // Root
         StatFs statFs = new StatFs(Environment.getRootDirectory().getAbsolutePath());
         fetchSizes(statFs);
-        logSizes("ROOT");
+        logSizes("Environment - ROOT");
 
         // External Storage
         statFs = new StatFs(Environment.getExternalStorageDirectory().getAbsolutePath());
         fetchSizes(statFs);
-        logSizes("External");
+        logSizes("Environment - External");
 
         // External Storage via Environment 4
         Environment4.Device[] devices = Environment4.getExternalStorage(this);
         for (File file : devices){
             statFs = new StatFs(file.getAbsolutePath());
             fetchSizes(statFs);
-            logSizes("Devices");
+            logSizes("Environment 4 - getExternalStorage");
+        }
+
+        // Storage via Environment 4
+        Environment4.Device[] devicesAll = Environment4.getStorage(this);
+        for (File file : devicesAll){
+            statFs = new StatFs(file.getAbsolutePath());
+            fetchSizes(statFs);
+            logSizes("Environment 4 - getStorage");
         }
     }
 
